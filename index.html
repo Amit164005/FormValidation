@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login & Signup Form</title>
+    <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+<section class="wrapper">
+    <div class="form signup">
+        <header>Signup</header>
+        <form action="#" onsubmit="signup(event)">
+            <input type="text" placeholder="Full name" required />
+            <input type="text" placeholder="Email address" required />
+            <input type="password" placeholder="Password" required />
+            <div class="checkbox">
+                <input type="checkbox" id="signupCheck" />
+                <label for="signupCheck">I accept all terms & conditions</label>
+            </div>
+            <input type="submit" value="Signup" />
+        </form>
+        <div id="signupResponse"></div> <!-- Response output space -->
+    </div>
+
+    <div class="form login">
+        <header>Login</header>
+        <form action="#" onsubmit="login(event)">
+            <input type="text" placeholder="Email address" required />
+            <input type="password" placeholder="Password" required />
+            <a href="#">Forgot password?</a>
+            <input type="submit" value="Login" />
+        </form>
+        <div id="loginResponse"></div> <!-- Response output space -->
+    </div>
+
+    
+      <script>
+        const wrapper = document.querySelector(".wrapper"),
+            signupHeader = document.querySelector(".signup header"),
+            loginHeader = document.querySelector(".login header");
+    
+        loginHeader.addEventListener("click", () => {
+            wrapper.classList.add("active");
+        });
+        signupHeader.addEventListener("click", () => {
+            wrapper.classList.remove("active");
+        });
+    
+        function isValidEmail(email) {
+            // Regular expression for validating email addresses
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+    
+        function isValidPassword(password) {
+            // Check if password length is at least 6 characters
+            return password.length >= 6;
+        }
+    
+        function signup(event) {
+            event.preventDefault();
+            const fullNameInput = document.querySelector('.signup input[placeholder="Full name"]');
+            const emailInput = document.querySelector('.signup input[placeholder="Email address"]');
+            const passwordInput = document.querySelector('.signup input[placeholder="Password"]');
+            const signupResponse = document.getElementById("signupResponse");
+    
+            const fullName = fullNameInput.value.trim();
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+    
+            if (!isValidEmail(email)) {
+                signupResponse.innerHTML = "Please enter a valid email address.";
+                return;
+            }
+    
+            if (!isValidPassword(password)) {
+                signupResponse.innerHTML = "Password must be at least 6 characters long.";
+                return;
+            }
+    
+            // If validation passes, you can proceed with signup processing
+            signupResponse.innerHTML = "Signup successful!";
+        }
+    
+        function login(event) {
+            event.preventDefault();
+            const emailInput = document.querySelector('.login input[placeholder="Email address"]');
+            const passwordInput = document.querySelector('.login input[placeholder="Password"]');
+            const loginResponse = document.getElementById("loginResponse");
+    
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+    
+            if (!isValidEmail(email)) {
+                loginResponse.innerHTML = "Please enter a valid email address.";
+                return;
+            }
+    
+            if (!isValidPassword(password)) {
+                loginResponse.innerHTML = "Password must be at least 6 characters long.";
+                return;
+            }
+    
+            // If validation passes, you can proceed with login processing
+            loginResponse.innerHTML = "Login successful!";
+        }
+    </script>
+    <script src="signup"></script>
+    
+   
+</section>
+</body>
+</html>
